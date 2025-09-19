@@ -8,18 +8,29 @@
 ;; - Automated impact credential generation
 ;; - Transparent and verifiable sustainability metrics
 
-;; Error codes
-(define-constant ERR-NOT-AUTHORIZED (err u100))
-(define-constant ERR-PROJECT-NOT-FOUND (err u101))
-(define-constant ERR-CLAIM-NOT-FOUND (err u102))
-(define-constant ERR-CLAIM-ALREADY-PROCESSED (err u103))
-(define-constant ERR-INVALID-IMPACT-TYPE (err u104))
-(define-constant ERR-INVALID-AMOUNT (err u105))
-(define-constant ERR-NOT-ENOUGH-VERIFICATIONS (err u106))
-(define-constant ERR-ALREADY-VERIFIED (err u107))
-(define-constant ERR-NOT-VALIDATOR (err u108))
-(define-constant ERR-DATA-SOURCE-NOT-AUTHORIZED (err u109))
-(define-constant ERR-VERIFICATION-PERIOD-ENDED (err u110))
+;; Robot Impact Tracker Error Codes
+;; Error codes provide granular feedback for contract operations
+
+;; Authorization Errors
+(define-constant ERR-NOT-AUTHORIZED          (err u100)) ;; User lacks necessary permissions
+(define-constant ERR-NOT-VALIDATOR           (err u108)) ;; Caller is not a designated validator
+
+;; Resource Lookup Errors
+(define-constant ERR-PROJECT-NOT-FOUND       (err u101)) ;; Requested project does not exist
+(define-constant ERR-CLAIM-NOT-FOUND         (err u102)) ;; Impact claim not found
+(define-constant ERR-DATA-SOURCE-NOT-AUTHORIZED (err u109)) ;; External data source not registered
+
+;; Claim State Errors
+(define-constant ERR-CLAIM-ALREADY-PROCESSED (err u103)) ;; Claim has already been finalized
+(define-constant ERR-VERIFICATION-PERIOD-ENDED (err u110)) ;; Verification window has closed
+
+;; Validation Errors
+(define-constant ERR-INVALID-IMPACT-TYPE     (err u104)) ;; Impact type is not registered or valid
+(define-constant ERR-INVALID-AMOUNT          (err u105)) ;; Impact amount is invalid
+(define-constant ERR-ALREADY-VERIFIED        (err u107)) ;; Validator has already submitted verification
+
+;; Verification Requirement Errors
+(define-constant ERR-NOT-ENOUGH-VERIFICATIONS (err u106)) ;; Insufficient number of verifications
 
 ;; Data space definitions
 
