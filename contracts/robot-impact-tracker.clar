@@ -565,3 +565,29 @@
     )
   )
 )
+
+;; Helper function to validate URL format (basic validation)
+(define-private (is-valid-url (url (string-utf8 200)))
+  (let ((url-str (unwrap! (some (as-max-len? url u100)) false)))
+    (and 
+     (or 
+      (starts-with url-str "https://")
+      (starts-with url-str "http://")
+     )
+     (contains url-str ".")
+    )
+  )
+)
+
+;; Compute weighted verification score
+(define-private (compute-verification-score 
+    (total-verified uint) 
+    (new-verification uint) 
+    (is-external bool))
+  (if is-external
+      ;; External verification gets more weight
+      (/ (+ (* total-verified u2) new-verification) u3)
+      ;; Regular verification
+      (/ (+ total-verified new-verification) u2)
+  )
+)
